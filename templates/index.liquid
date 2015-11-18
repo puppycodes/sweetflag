@@ -1,10 +1,28 @@
+<div id="bg"> </div>
+<div id="bg1"> </div>
+<div id="bg2"> </div>
+
+<div class="container">
+
+
+
+<div class="header-text">
+<span> what's your current vibe? </span>
+</div>
+
+<div class="header">
+<span class="logo">  <img src="/static/images/logo.svg"></span>
+</div>
+
+
 <div class="grid-uniform">
 
+
   {% for collection in collections %}
-  
-  
+
+
   {% if collection.handle == 'before' %}
-     <div class="collection-product"> 
+     <div class="collection-product">
           <h1>{{ collection.title }}</h1>
           <p>{{ collection.description }}</p>
           <a class="shop-cta shop-button" href="{{ collection.url }}">
@@ -12,13 +30,13 @@
           </a>
     </div>
   {% endif %}
-  
+
   {% endfor %}
-  
+
   {% for collection in collections %}
-  
+
     {% if collection.handle == 'during' %}
-     <div class="collection-product"> 
+     <div class="collection-product">
           <h1>{{ collection.title }}</h1>
           <p>{{ collection.description }}</p>
           <a class="shop-cta shop-button" href="{{ collection.url }}">
@@ -26,13 +44,13 @@
           </a>
     </div>
   {% endif %}
-  
+
   {% endfor %}
-  
+
    {% for collection in collections %}
-  
+
     {% if collection.handle == 'after' %}
-     <div class="collection-product"> 
+     <div class="collection-product">
           <h1>{{ collection.title }}</h1>
           <p>{{ collection.description }}</p>
           <a class="shop-cta shop-button" href="{{ collection.url }}">
@@ -40,6 +58,5 @@
           </a>
     </div>
   {% endif %}
-  
+
   {% endfor %}
- 
