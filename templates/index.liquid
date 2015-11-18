@@ -1,0 +1,45 @@
+<div class="grid-uniform">
+
+  {% for collection in collections %}
+  
+  
+  {% if collection.handle == 'before' %}
+     <div class="collection-product"> 
+          <h1>{{ collection.title }}</h1>
+          <p>{{ collection.description }}</p>
+          <a class="shop-cta shop-button" href="{{ collection.url }}">
+              View all products in this collection
+          </a>
+    </div>
+  {% endif %}
+  
+  {% endfor %}
+  
+  {% for collection in collections %}
+  
+    {% if collection.handle == 'during' %}
+     <div class="collection-product"> 
+          <h1>{{ collection.title }}</h1>
+          <p>{{ collection.description }}</p>
+          <a class="shop-cta shop-button" href="{{ collection.url }}">
+              View all products in this collection
+          </a>
+    </div>
+  {% endif %}
+  
+  {% endfor %}
+  
+   {% for collection in collections %}
+  
+    {% if collection.handle == 'after' %}
+     <div class="collection-product"> 
+          <h1>{{ collection.title }}</h1>
+          <p>{{ collection.description }}</p>
+          <a class="shop-cta shop-button" href="{{ collection.url }}">
+              View all products in this collection
+          </a>
+    </div>
+  {% endif %}
+  
+  {% endfor %}
+ 
