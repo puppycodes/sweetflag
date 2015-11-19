@@ -26,6 +26,7 @@
   {{ content_for_header }}
 
   {{ 'style.scss.css' | asset_url | stylesheet_tag }}
+  {{ 'style.css' | asset_url | stylesheet_tag }}
   {{ 'social/social-icons.css' | global_asset_url | stylesheet_tag }}
   {{ '//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css' | stylesheet_tag }}
 
@@ -48,38 +49,41 @@
   {{ '//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js' | script_tag }}
   <script>jQuery('html').removeClass('no-js').addClass('js');</script>
 
+
+
 </head>
 
 <body id="{{ page_title | handle }}" class="{% if customer %}customer-logged-in {% endif %}template-{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }}" >
+  <div id="bg"> </div>
+  <div id="bg1"> </div>
+  <div id="bg2"> </div>
+
 
   <div class="container">
 
-    <header class="row">
+      <div class="header">
 
+      <span class="logo">
+    <a href="/">  {{ 'logo.svg' | asset_url | img_tag: shop.name }} </a>
+      </span>
 
-
-      {% comment %}
-
-      <div class="social-links half column left-aligned">
-      {% include 'social-links' %}
+      <div class="cart-link">
+        <a href="/cart"> {{ cart.item_count }} {{ cart.item_count | pluralize: 'item', 'items' }} ({{ cart.total_price | money }})</a>
       </div>
-      {% endcomment %}
+      <div class="menu">
+  
+        {% include 'site-nav' %}
+      </div>
 
 
-      {% comment %}
-        Note on checkout link: it is a good idea to avoid linking to /checkout directly because shops that use
-        Paypal Express Checkout and/or Google Checkout have special checkout buttons on the /cart page. Also,
-        special instructions for the seller are entered on the /cart page. Finally, the universal tracking code
-        of Google Analytics may not work if linking directly to the /checkout page.
-      {% endcomment %}
+      </div>
 
-      <div class="half column right-aligned">
 
-        <div class="cart-link">
-          <a href="/cart"><img src="{{ 'cart.svg' | asset_url }}" /> {{ cart.item_count }} {{ cart.item_count | pluralize: 'item', 'items' }} ({{ cart.total_price | money }})</a>
-        </div>
+
+
 
         {% if shop.customer_accounts_enabled %}
+
         <div class="customer-links">
           {% if customer %}
             Logged in as <a href="/account">{{ customer.first_name }}</a> · {{ 'Log out' | customer_logout_link }}
@@ -92,7 +96,7 @@
         </div>
         {% endif %}
 
-      </div>
+
 
       {% comment %}
         It would be nice if the logo was a shop setting, rather than a theme setting.
@@ -103,15 +107,13 @@
         Theme settings are added to http://www.shopify.com/admin/themes/current#config/settings.html
       {% endcomment %}
 
-      <div class="masthead full column clear centered" role="banner">
+
         {% if settings.use_logo %}
         <a id="logo" href="/">
           {{ 'logo.png' | asset_url | img_tag: shop.name }}
         </a>
         {% else %}
-        <a id="site-title" href="/">
-          {{ shop.name }}
-        </a>
+
         {% endif %}
         {% if template == 'index' %}
         {% comment %}
@@ -121,19 +123,9 @@
         {% endcomment %}
         <h1 class="hidden">{{ shop.name }}</h1>
         {% endif %}
-      </div>
-
-      <div class="clear full column">
-
-        {% comment %}
-          Main Navigation
-        {% endcomment %}
-        {% include 'site-nav' %}
 
 
 
-
-      </div>
 
     </header>
 
@@ -144,6 +136,7 @@
       {% endcomment %}
       {{ content_for_layout }}
     </div>
+  </div>
 
     <div class="footer">
 <div class="footer-links">
@@ -154,7 +147,7 @@
 
 </div>
 <div class="logotype">
-<img src="/static/images/logotype.png"></div>
+{{ 'logotype.svg' | asset_url | img_tag: shop.name }}</div>
 </div>
 
 </div>
