@@ -1,45 +1,34 @@
 <div class="grid-uniform">
-
-
   {% for collection in collections %}
-
-
   {% if collection.handle == 'before' %}
-     <div class="collection-product">
-          <h1>{{ collection.title }}</h1>
+     <div class="collection-product col-xs-12 col-sm-4">
+     <a href="{{ collection.url }}">
+     <div class="collection-image" style="background:url('{{ 'before.gif' | asset_url }}'); background-size:cover; background-position: center;"></div>
+          <span class="collection-title">{{ collection.title }}</span>
           <p>{{ collection.description }}</p>
-          <a class="shop-cta shop-button" href="{{ collection.url }}">
-              View all products in this collection
           </a>
     </div>
   {% endif %}
-
   {% endfor %}
-
   {% for collection in collections %}
-
     {% if collection.handle == 'during' %}
-     <div class="collection-product">
-          <h1>{{ collection.title }}</h1>
+     <div class="collection-product col-xs-12 col-sm-4">
+     <a href="{{ collection.url }}">
+     <div class="collection-image" style="background:url('{{ 'during.gif' | asset_url }}');background-size:cover; background-position: center;"></div>
+          <span class="collection-title">{{ collection.title }}</span>
           <p>{{ collection.description }}</p>
-          <a class="shop-cta shop-button" href="{{ collection.url }}">
-              View all products in this collection
           </a>
     </div>
   {% endif %}
-
   {% endfor %}
-
-   {% for collection in collections %}
-
-    {% if collection.handle == 'after' %}
-     <div class="collection-product">
-          <h1>{{ collection.title }}</h1>
+{% for collection in collections %}
+  {% if collection.handle == 'after' %}
+     <div class="collection-product col-xs-12 col-sm-4">
+     <a href="{{ collection.url }}">
+     <div class="collection-image" style="background:url('{{ 'after.gif' | asset_url }}');background-size:cover; background-position: center;"></div>
+          <span class="collection-title">{{ collection.title }}</span>
           <p>{{ collection.description }}</p>
-          <a class="shop-cta shop-button" href="{{ collection.url }}">
-              View all products in this collection
           </a>
-    </div>
+     </div>
   {% endif %}
-
   {% endfor %}
