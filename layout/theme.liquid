@@ -30,6 +30,7 @@
 
   {{ 'style.scss.css' | asset_url | stylesheet_tag }}
   {{ 'style.css' | asset_url | stylesheet_tag }}
+  {{ 'swiper.min.css' | asset_url | stylesheet_tag }}
   {{ 'social/social-icons.css' | global_asset_url | stylesheet_tag }}
   {{ '//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css' | stylesheet_tag }}
 
@@ -159,6 +160,9 @@
 
   {{ 'shop.js'  | asset_url | script_tag }}
   {{ 'hamburgler.js'  | asset_url | script_tag }}
+  {{ 'swiper.min.js'  | asset_url | script_tag }}
+  {{ 'swiper.jquery.min.js'  | asset_url | script_tag }}
+  {{ 'swiper-main.js'  | asset_url | script_tag }}
 
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha256-Sk3nkD6mLTMOF0EOpNtsIry+s1CsaqQC1rVLTAy+0yc= sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
 
