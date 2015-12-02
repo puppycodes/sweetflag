@@ -3,7 +3,7 @@
 {% assign unavailable = 'Unavailable' %}
 
 
-
+<span class="backtoshop"> <a href="{{ collection.url }}">Back To Shop</a> </span>
 
  <div class="product" itemscope itemtype="http://schema.org/Product">
 
@@ -14,7 +14,10 @@
 
   <div class="row">
     <div class="product-photos">
-        <div class="col-xs-6 col-sm-6">
+
+      <div class="col-xs-12 col-sm-6 left-photo">
+
+
     {% if product.images.size == 0 %}
 
       <div class="product-photo-container">
@@ -33,29 +36,17 @@
 
       </div> <!-- close the cols -->
 
-      <div class="col-xs-6 col-sm-6">
+      <div class="col-xs-12 col-sm-6 right-slides" >
 
-      {% if product.images.size > 1 %}
-      <div class="swiper-container">
-      <div class="swiper-wrapper">
-        {% for image in product.images %}
-        <div class="swiper-slide product-photo-thumb">
-        <a href="{{ image | img_url: '1024x1024' }}"><img src="{{ image | img_url: 'large' }}" alt="{{ image.alt | escape }}" /></a>
-        </div>
-        {% endfor %}
-      {% endif %}
-    {% endif %}
-    </div>
+  <div class="product-details">
 
+<span class="backtoshop-mobile"> <a href="{{ collection.url }}">Back To Shop</a> </span>
 
-
-    </div><!-- .product-photos -->
-    <div style="background-image: url('{{ 'arrow.svg' | asset_url }}');background-size: 20px;" class="swiper-button-prev"></div>
-    <div style="background-image: url('{{ 'arrow.svg' | asset_url }}');background-size: 20px;" class="swiper-button-next"></div>
-
-    <div class="product-details">
-
-      <h1 itemprop="name">{{ product.title }}</h1>
+  <div id="product-info">
+    <div class="triangle-container">
+      <img class="triangle-image" src="{{ 'right-triangle.png' | asset_url }}')">
+        <div class="top-left-triangle">
+          <h1 itemprop="name">{{ product.title }}</h1>
 
       {% assign product_vendor_handle = product.vendor | handle %}
       {% comment %}
@@ -74,8 +65,11 @@
         All themes by Shopify should support the Product Reviews app out of the box.
         https://apps.shopify.com/product-reviews
       {% endcomment %}
-      <div id="shopify-product-reviews" data-id="{{ product.id }}">{{ product.metafields.spr.reviews }}</div>
 
+   <!--  <div id="shopify-product-reviews" data-id="{{ product.id }}">{{ product.metafields.spr.reviews }}</div> -->
+
+   <span class="vibes">vibes: {{ product.tags | join: ', ' }}</span>
+      </div>
       <div id="product-price" itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="delta">
         <meta itemprop="priceCurrency" content="{{ shop.currency }}" />
         {% if product.available %}
@@ -112,12 +106,115 @@
       <div id="backorder" class="hidden">
         <p>{{ '%s is back-ordered. We will ship it separately in 10 to 15 days.' | replace: '%s', '<span id="selected-variant"></span>' }}</p>
       </div>
-
+      </div>
       <div id="product-add">
         <input type="submit" name="add" id="add" class="primary button" value="{{ add_to_cart | escape }}">
       </div>
+<div class="quantity-container">
+      <input min="1" type="number" id="quantity" name="quantity" value="1" />
+          <input type='button' value='-' class='qtyminus' field='quantity' />
+          <input type='button' value='+' class='qtyplus' field='quantity' />
+      </div>
+</div> <!-- product info -->
 
-      {% if collection %}
+
+
+      <div id="swiper">
+      <div class="swiper-container">
+      <div class="swiper-wrapper">
+        {% for image in product.images %}
+        <div class="swiper-slide product-photo-thumb">
+        <a href="{{ image | img_url: '1024x1024' }}"><img src="{{ image | img_url: 'large' }}" alt="{{ image.alt | escape }}" /></a>
+        </div>
+        {% endfor %}
+
+    {% endif %}
+    </div>
+    </div>
+    <div style="background-image: url('{{ 'arrow.svg' | asset_url }}');background-size: 20px;" class="swiper-button-prev"></div>
+    <div style="background-image: url('{{ 'arrow.svg' | asset_url }}');background-size: 20px;" class="swiper-button-next"></div>
+
+    <div id="product-info-2">
+      <div class="triangle-container">
+        <img class="triangle-image" src="{{ 'right-triangle.png' | asset_url }}')">
+          <div class="top-left-triangle">
+            <h1 itemprop="name">{{ product.title }}</h1>
+
+        {% assign product_vendor_handle = product.vendor | handle %}
+        {% comment %}
+        Do we have a collection that has the same name as our product vendor name?
+        If we do, let's have the vendor link point to it.
+        If not, we will point to the automatic vendor collection.
+        {% endcomment %}
+        {% if collections[product_vendor_handle].handle == product_vendor_handle %}
+          {% assign vendor_url = collections[product_vendor_handle].url %}
+        {% else %}
+          {% assign vendor_url = product.vendor | url_for_vendor %}
+        {% endif %}
+        <h2 itemprop="brand" class="delta">{{ product.vendor | link_to: vendor_url }}</h2>
+
+        {% comment %}
+          All themes by Shopify should support the Product Reviews app out of the box.
+          https://apps.shopify.com/product-reviews
+        {% endcomment %}
+
+     <!--  <div id="shopify-product-reviews" data-id="{{ product.id }}">{{ product.metafields.spr.reviews }}</div> -->
+
+     <span class="vibes">vibes: {{ product.tags | join: ', ' }}</span>
+        </div>
+        <div id="product-price" itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="delta">
+          <meta itemprop="priceCurrency" content="{{ shop.currency }}" />
+          {% if product.available %}
+          <link itemprop="availability" href="http://schema.org/InStock" />
+          {% else %}
+          <link itemprop="availability" href="http://schema.org/OutOfStock" />
+          {% endif %}
+          <p>
+            {% assign variant = product.selected_or_first_available_variant %}
+            {% if product.compare_at_price > product.price %}
+            <span class="product-price on-sale" itemprop="price">{{ variant.price | money }}</span>
+            <s class="product-compare-price">{{ variant.compare_at_price | money }}</s>
+            {% else %}
+            <span class="product-price" itemprop="price">{{ variant.price | money }}</span>
+            {% endif %}
+          </p>
+        </div>
+
+        {% assign hide_default_title = false %}
+        {% if product.variants.size == 1 and product.variants.first.title contains 'Default' %}
+          {% assign hide_default_title = true %}
+        {% endif %}
+
+        <div id="product-variants" class="{% if hide_default_title %} hidden{% endif %}">
+          <select id="product-select" name="id">
+          {% for variant in product.variants %}
+            <option{% if variant == product.selected_or_first_available_variant %} selected{% endif %} value="{{ variant.id }}">
+            {{ variant.title }} - {{ variant.price | money }}
+            </option>
+          {% endfor %}
+          </select>
+        </div>
+
+        <div id="backorder" class="hidden">
+          <p>{{ '%s is back-ordered. We will ship it separately in 10 to 15 days.' | replace: '%s', '<span id="selected-variant"></span>' }}</p>
+        </div>
+        </div>
+        <div id="product-add">
+          <input type="submit" name="add" id="add" class="primary button" value="{{ add_to_cart | escape }}">
+        </div>
+    <div class="quantity-container">
+        <input min="1" type="number" id="quantity" name="quantity" value="1" />
+            <input type='button' value='-' class='qtyminus' field='quantity' />
+            <input type='button' value='+' class='qtyplus' field='quantity' />
+        </div>
+    </div> <!-- product info 2 -->
+
+
+
+    </div><!-- .product-photos -->
+
+
+    <!--  {% if collection %}
         {% if collection.previous_product or collection.next_product %}
         <div>
         {% if collection.previous_product %}
@@ -130,11 +227,9 @@
         {% endif %}
         </div>
         {% endif %}
-      {% endif %}
+      {% endif %}-->
 
-      <label for="quantity">Qty: </label>
-<input min="1" type="number" id="quantity" name="quantity" value="1" />
-<style>#quantity { padding:5px; width:35px; border: 1px solid #555; }</style>
+
 
     </div> <!-- .product-details -->
 
@@ -154,7 +249,10 @@
   Adding support for product options. See here for details:
   http://docs.shopify.com/support/your-website/themes/can-i-make-my-theme-use-products-with-multiple-options
 {% endcomment %}
-
+<span class="related-header">related vibes</span>
+<div class="related-container">
+{% include 'related-products' %}
+</div>
 <script>
 
 var selectCallback = function(variant, selector) {

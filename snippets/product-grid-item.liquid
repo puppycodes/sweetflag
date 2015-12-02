@@ -40,7 +40,7 @@ Here, for the sake of teaching, we will use 2 presentation options:
         {% endif %}
       </span>
       <div class="vibes">
-              <span class="vibes">vibes: {% for tag in product.tags %}{{ tag }}, {% endfor %}</span>
+              <span class="vibes">vibes: {{ product.tags | join: ', ' }}</span>
       {% comment %}
         All themes by Shopify should support the Product Reviews app out of the box.
         https://apps.shopify.com/product-reviews
@@ -66,7 +66,7 @@ The cycle element is documented here: http://docs.shopify.com/themes/liquid-basi
 {% elsif product-grid-item == 'four-per-row' %}
 {% cycle 'clear': '', '', '', '<div style="clear:both"></div>' %}
 {% elsif product-grid-item == 'three-per-row' %}
-{% cycle 'clear': '', '', '<div style="clear:both"></div>' %}
+{% cycle 'clear': '', '', '<!--<div style="clear:both"></div>-->' %}
 {% elsif product-grid-item == 'two-per-row' %}
-{% cycle 'clear': '', '<div style="clear:both"></div>' %}
+{% cycle 'clear': '', '<!--<div style="clear:both"></div>-->' %}
 {% endif %}
