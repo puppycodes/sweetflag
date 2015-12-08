@@ -32,3 +32,19 @@
      </div>
   {% endif %}
   {% endfor %}
+
+
+  <!-- Swiper -->
+  <div class="frontpage swiper-container">
+    <div class="promoted-header"> new stuff! </div>
+      <div class="swiper-wrapper">
+          <div class="swiper-slide"><a href="{{ all_products[settings.product_slide_1].url }}"><img src="{{ 'slide1.jpg' | asset_url }}"> </a>  </div>
+          <div class="swiper-slide"><a href="{{ all_products[settings.product_slide_2].url }}"><img src="{{ 'slide2.jpg' | asset_url }}"> </a> </div>
+          <div class="swiper-slide"><a href="{{ all_products[settings.product_slide_3].url }}"><img src="{{ 'slide3.jpg' | asset_url }}"> </a> </div>
+      </div>
+  </div>
+  <!-- Add Arrows -->
+  <div class="arrow-container">
+  <div style="background-image: url('{{ 'arrow.svg' | asset_url }}');background-size: 20px;" class="swiper-button-next-front "></div>
+  <div style="background-image: url('{{ 'arrow.svg' | asset_url }}');background-size: 20px;" class="swiper-button-prev-front "></div>
+</div>

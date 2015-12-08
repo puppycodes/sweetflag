@@ -5,8 +5,8 @@ var mySwiper = new Swiper ('.swiper-container', {
   direction: 'horizontal',
   loop: true,
   // Default parameters
-    slidesPerView: 2,
-    spaceBetween: 35,
+    slidesPerView: 1,
+    spaceBetween: 30,
     // Responsive breakpoints
     breakpoints: {
       // when window width is <= 320px
@@ -30,18 +30,10 @@ var mySwiper = new Swiper ('.swiper-container', {
   //pagination: '.swiper-pagination',
 
   // Navigation arrows
-  nextButton: '.swiper-button-next',
-  prevButton: '.swiper-button-prev',
+  nextButton: '.swiper-button-next-front',
+  prevButton: '.swiper-button-prev-front',
 
   // And if we need scrollbar
   //scrollbar: '.swiper-scrollbar',
 })
-
-/* Update main product image when a thumbnail is clicked. */
-/*==========================*/
-$('.product-photo-thumb a').on('click', function(e) {
-  e.preventDefault();
-  switchImage($(this).attr('href'), null, $('.product-photo-container img')[0]);
-} );
-
   });
