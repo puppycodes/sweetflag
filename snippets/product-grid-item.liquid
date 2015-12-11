@@ -66,7 +66,11 @@ The cycle element is documented here: http://docs.shopify.com/themes/liquid-basi
 {% elsif product-grid-item == 'four-per-row' %}
 {% cycle 'clear': '', '', '', '<div style="clear:both"></div>' %}
 {% elsif product-grid-item == 'three-per-row' %}
-{% cycle 'clear': '', '<div class="two-clear"></div>', '<div class="three-clear"></div>' %}
+{% cycle 'clear': '', '', '<span class="three-clear"></span>' %}
 {% elsif product-grid-item == 'two-per-row' %}
 {% cycle 'clear': '', '<!--<div style="clear:both"></div>-->' %}
+{% endif %}
+
+{% if product-grid-item == 'three-per-row' %}
+{% cycle 'clear2': '', '<span class="two-clear"></span>' %}
 {% endif %}

@@ -48,8 +48,8 @@
 </ul>
 
 </div>
+<span class="trysome">what's your vibe...? </span><div class="suggestions"></div>
 </div>
-
 
 
 
@@ -218,4 +218,16 @@ $(".coll-filter option").prop('selected', false).filter(function() {
     return $(this).text() == 'All';
 }).prop('selected', true).change();;
 });
+</script>
+
+<script>
+  $(function(){
+      $(".suggestions").typed({
+        strings: ["{{ settings.promoted_vibes_1 }}", "{{ settings.promoted_vibes_2 }}", "{{ settings.promoted_vibes_3 }}", "{{ settings.promoted_vibes_4 }}"],
+        typeSpeed: 100,
+         backSpeed: 100,
+         showCursor: false,
+         loop: true
+      });
+  });
 </script>

@@ -1,8 +1,9 @@
 // HAMBURGLERv2
 
 function togglescroll() {
-  $('body').on('touchstart', function(e) {
-    if ($('body').hasClass('noscroll')) {
+  $('html').on('touchstart', function(e) {
+    // Just add the check: !$(e.target).hasClass('icon')
+    if (!$(e.target).hasClass('icon') && $('body').hasClass('html')) {
       e.preventDefault();
     }
   });
@@ -13,7 +14,7 @@ $(document).ready(function() {
   $(".icon").click(function() {
     $(".mobilenav").fadeToggle(500);
     $(".top-menu").toggleClass("top-animate");
-    $("body").toggleClass("noscroll");
+    $("html").toggleClass("noscroll");
     $(".mid-menu").toggleClass("mid-animate");
     $(".bottom-menu").toggleClass("bottom-animate");
   });
@@ -25,7 +26,7 @@ $(document).keydown(function(e) {
   if (e.keyCode == 27) {
     $(".mobilenav").fadeOut(500);
     $(".top-menu").removeClass("top-animate");
-    $("body").removeClass("noscroll");
+    $("html").removeClass("noscroll");
     $(".mid-menu").removeClass("mid-animate");
     $(".bottom-menu").removeClass("bottom-animate");
   }
