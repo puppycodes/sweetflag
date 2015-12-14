@@ -1,3 +1,4 @@
+<span class="entershop"> enter a shop </span>
 <div class="grid-uniform">
   {% for collection in collections %}
   {% if collection.handle == 'before' %}
@@ -36,7 +37,6 @@
 
 
 
-
 <div class="frontpage frontpage-slider swiper-container" style="width:97%;">
        <div class="swiper-wrapper">
            <div class="swiper-slide" style="background-image:url('{{ 'slide1.jpg' | asset_url }}');height:400px; background-size:cover;background-position: center center;"><a href="{{ all_products[settings.product_slide_1].url }}"><span class="promo-text">{{ settings.product_slide_1_text }}</span></a></div>
@@ -46,3 +46,5 @@
        </div>
 
    </div>
+
+<div class="slider-fp-background"></div>

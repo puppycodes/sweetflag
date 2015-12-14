@@ -31,6 +31,7 @@
   {{ 'style.scss.css' | asset_url | stylesheet_tag }}
   {{ 'style.css' | asset_url | stylesheet_tag }}
   {{ 'swiper.min.css' | asset_url | stylesheet_tag }}
+  {{ 'magnify.css' | asset_url | stylesheet_tag }}
   {{ 'social/social-icons.css' | global_asset_url | stylesheet_tag }}
   <!--{{ '//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css' | stylesheet_tag }}-->
 
@@ -65,11 +66,11 @@
 
     @font-face {
       font-family: 'u8';
-      src: url('{{ 'U8Hairline.eot'  | asset_url }}'); /* IE9 Compat Modes */
-      src: url('{{ 'U8Hairline.eot'  | asset_url }}?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-           url('{{ 'U8Hairline.woff'  | asset_url }}') format('woff'), /* Modern Browsers */
-           url('{{ 'U8Hairline.ttf'  | asset_url }}')  format('truetype'), /* Safari, Android, iOS */
-           url('{{ 'U8Hairline.svg'  | asset_url }}#e9ed6071382e49f6725b6d8deaafa36d') format('svg'); /* Legacy iOS */
+      src: url('{{ 'U8thin.eot'  | asset_url }}'); /* IE9 Compat Modes */
+      src: url('{{ 'U8thin.eot'  | asset_url }}?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+           url('{{ 'U8thin.woff'  | asset_url }}') format('woff'), /* Modern Browsers */
+           url('{{ 'U8thin.ttf'  | asset_url }}')  format('truetype'), /* Safari, Android, iOS */
+           url('{{ 'U8thin.svg'  | asset_url }}#e9ed6071382e49f6725b6d8deaafa36d') format('svg'); /* Legacy iOS */
 
     }
 
@@ -248,7 +249,8 @@
   {{ 'trim.js'  | asset_url | script_tag }}
   {{ 'fastclick.js'  | asset_url | script_tag }}
   {{ 'typed.min.js'  | asset_url | script_tag }}
-    {{ 'hamburgler.js'  | asset_url | script_tag }}
+  {{ 'hamburgler.js'  | asset_url | script_tag }}
+  {{ 'okzoom.min.js'  | asset_url | script_tag }}
 
 {% if template == 'collection' %}
 <div id="magic">
@@ -338,8 +340,6 @@ $(function(){
 });
 
  </script>
-
-
 
 
 

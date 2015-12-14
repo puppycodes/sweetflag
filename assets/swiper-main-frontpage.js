@@ -4,6 +4,7 @@ var mySwiper = new Swiper ('.swiper-container', {
   // Optional parameters
   direction: 'horizontal',
   loop: true,
+  autoplay: 7000,
   // Default parameters
     slidesPerView: 1,
 
