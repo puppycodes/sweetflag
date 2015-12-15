@@ -86,7 +86,7 @@
 
  <!--  <div id="shopify-product-reviews" data-id="{{ product.id }}">{{ product.metafields.spr.reviews }}</div> -->
 
- <span class="vibes">vibes: {{ product.tags | join: ', ' }}</span>
+ <span class="vibes">vibes: {% for tag in product.tags %}<a href="/collections/browse/{{ tag }}">{{ tag }}</a>, {% endfor %}</span>
     </div>
     <div id="product-price" itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="delta">
       <meta itemprop="priceCurrency" content="{{ shop.currency }}" />
@@ -126,7 +126,7 @@
     </div>
     </div>
     <div id="product-add">
-      <input type="submit" name="add" id="add" class="primary button" value="{{ add_to_cart | escape }}">
+      <input type="submit" name="add" id="add" class="primary button cart-count" value="{{ add_to_cart | escape }}">
     </div>
 <div class="quantity-container">
     <input min="1" type="number" id="quantity" name="quantity" value="1" />
@@ -321,4 +321,10 @@ jQuery(function($) {
 Shopify.Image.preload({{ product.images | json }}, 'grande');
 Shopify.Image.preload({{ product.images | json }}, '1024x1024');
 
+</script>
+
+<script type="text/javscript">
+    $(document).on('cart.requestComplete', function(event, cart) {
+        $('#counter').html(cart.item_count);
+    });
 </script>

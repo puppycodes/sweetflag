@@ -120,7 +120,7 @@
     <li><a href="{{ link.url }}">{{ link.title }}</a></li>
 
     {% endfor %}
-    <li><a href="/cart"> {{ cart.item_count }} {{ cart.item_count | pluralize: 'item', 'items' }} ({{ cart.total_price | money }})</a></li>
+    <li><a href="/cart"><span id="#counter">{{ cart.item_count }} {{ cart.item_count | pluralize: 'item', 'items' }} ({{ cart.total_price | money }})</span></a></li>
     </ul>
     </div>
 
@@ -150,7 +150,7 @@
         </span>
 
         <div class="cart-link">
-          <a href="/cart"> {{ cart.item_count }} {{ cart.item_count | pluralize: 'item', 'items' }} ({{ cart.total_price | money }})</a>
+          <a href="/cart"> <span id="counter"> {{ cart.item_count }} {{ cart.item_count | pluralize: 'item', 'items' }} ({{ cart.total_price | money }}) </span></a>
         </div>
 
         <div class="menu">
@@ -251,6 +251,8 @@
   {{ 'typed.min.js'  | asset_url | script_tag }}
   {{ 'hamburgler.js'  | asset_url | script_tag }}
   {{ 'okzoom.min.js'  | asset_url | script_tag }}
+  {{ 'cart.min.js'  | asset_url | script_tag }}
+  {{ 'rivets.bundled.min.js'  | asset_url | script_tag }}
 
 {% if template == 'collection' %}
 <div id="magic">
@@ -345,6 +347,7 @@ $(function(){
 
 
 {% include 'ajaxify-cart' %}
+
 
 
 </body>
