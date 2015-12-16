@@ -28,7 +28,7 @@
 
 <div id="container-typed-tags">
   <div id="the-basics">
-    <input class="typeahead" type="text" placeholder="enter vibe">
+    <input class="typeahead" type="text" type="submit" placeholder="enter vibe">
   </div>
 <div id="hidden-picker">
 <ul class="clearfix filters">
@@ -189,6 +189,7 @@ var states = [{% for tag in collection.all_tags %}'{{ tag }}',{% endfor %}
 $('#the-basics .typeahead').typeahead({
   hint: true,
   highlight: false,
+  autoSelect: true,
   minLength: 1
 },
 {
@@ -198,6 +199,7 @@ $('#the-basics .typeahead').typeahead({
 
 
 </script>
+
 
 <!--- END TYPEHEAD.JS ---->
 
@@ -230,4 +232,23 @@ $(".coll-filter option").prop('selected', false).filter(function() {
          loop: true
       });
   });
+</script>
+
+
+
+
+
+
+<script>
+$('.typeahead').keypress(function (e) {
+ var key = e.which;
+ if(key == 13)  // the enter key code
+  {
+    $('.tt-dataset div:first-child').click();
+    return false;
+  }
+});
+$('.typeahead').bind('typeahead:autocomplete', function(ev, autocomplete) {
+  console.log('autocomplete: ' + autocomplete);
+});
 </script>

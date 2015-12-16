@@ -77,7 +77,7 @@
 {% for product in collection.products %}
   {% include 'product-grid-item' with products_per_row %}
 {% else %}
-  <p>There are no products in this view.</p>
+  <p class="no-products">There are no products in this view.</p>
 {% endfor %}
 </ul>
 {% if paginate.pages > 1 %}

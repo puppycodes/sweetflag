@@ -79,10 +79,7 @@
 {% endif %}
     <h2 itemprop="brand" class="delta">{{ product.vendor | link_to: vendor_url }}</h2>
 
-    {% comment %}
-      All themes by Shopify should support the Product Reviews app out of the box.
-      https://apps.shopify.com/product-reviews
-    {% endcomment %}
+
 
  <!--  <div id="shopify-product-reviews" data-id="{{ product.id }}">{{ product.metafields.spr.reviews }}</div> -->
 
@@ -111,7 +108,7 @@
       {% assign hide_default_title = true %}
 {% endif %}
 
-    <div id="product-variants" class="{% if hide_default_title %} hidden{% endif %}">
+    <div id="product-variants" class="prod-variants{% if hide_default_title %} hidden{% endif %}">
       <select id="product-select" name="id">
 {% for variant in product.variants %}
           <option{% if variant == product.selected_or_first_available_variant %} selected{% endif %} value="{{ variant.id }}">
@@ -125,6 +122,7 @@
       <p>{{ '%s is back-ordered. We will ship it separately in 10 to 15 days.' | replace: '%s', '<span id="selected-variant"></span>' }}</p>
     </div>
     </div>
+    <span id="stock-message"> Many of our products are handmade by the artists and designers with whom we work, and replenishing them takes time.  Please contact us at orders@sweetflag.club if you would like us to email you with updates on re-orders, or to request a particular item be re-stocked.</span>
     <div id="product-add">
       <input type="submit" name="add" id="add" class="primary button cart-count" value="{{ add_to_cart | escape }}">
     </div>
@@ -133,6 +131,9 @@
         <input type='button' value='-' class='qtyminus' field='quantity' />
         <input type='button' value='+' class='qtyplus' field='quantity' />
     </div>
+<div class="description-padding">
+</div>
+
 </div> <!-- product info -->
 
 
@@ -141,80 +142,7 @@
 
   {% endif %}
 
-  <div id="product-info-2">
-    <div class="triangle-container">
-      <img class="triangle-image" src="{{ 'right-triangle.png' | asset_url }}')">
-        <div class="top-left-triangle">
-          <h1 itemprop="name">{{ product.title }}</h1>
 
-      {% assign product_vendor_handle = product.vendor | handle %}
-      {% comment %}
-      Do we have a collection that has the same name as our product vendor name?
-      If we do, let's have the vendor link point to it.
-      If not, we will point to the automatic vendor collection.
-      {% endcomment %}
-      {% if collections[product_vendor_handle].handle == product_vendor_handle %}
-        {% assign vendor_url = collections[product_vendor_handle].url %}
-      {% else %}
-        {% assign vendor_url = product.vendor | url_for_vendor %}
-      {% endif %}
-      <h2 itemprop="brand" class="delta">{{ product.vendor | link_to: vendor_url }}</h2>
-
-      {% comment %}
-        All themes by Shopify should support the Product Reviews app out of the box.
-        https://apps.shopify.com/product-reviews
-      {% endcomment %}
-
-   <!--  <div id="shopify-product-reviews" data-id="{{ product.id }}">{{ product.metafields.spr.reviews }}</div> -->
-
-   <span class="vibes">vibes: {{ product.tags | join: ', ' }}</span>
-      </div>
-      <div id="product-price" itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="delta">
-        <meta itemprop="priceCurrency" content="{{ shop.currency }}" />
-        {% if product.available %}
-        <link itemprop="availability" href="http://schema.org/InStock" />
-        {% else %}
-        <link itemprop="availability" href="http://schema.org/OutOfStock" />
-        {% endif %}
-        <p>
-          {% assign variant = product.selected_or_first_available_variant %}
-          {% if product.compare_at_price > product.price %}
-          <span class="product-price on-sale" itemprop="price">{{ variant.price | money }}</span>
-          <s class="product-compare-price">{{ variant.compare_at_price | money }}</s>
-          {% else %}
-          <span class="product-price" itemprop="price">{{ variant.price | money }}</span>
-          {% endif %}
-        </p>
-      </div>
-
-      {% assign hide_default_title = false %}
-      {% if product.variants.size == 1 and product.variants.first.title contains 'Default' %}
-        {% assign hide_default_title = true %}
-      {% endif %}
-
-      <div id="product-variants" class="{% if hide_default_title %} hidden{% endif %}">
-        <select id="product-select" name="id">
-        {% for variant in product.variants %}
-          <option{% if variant == product.selected_or_first_available_variant %} selected{% endif %} value="{{ variant.id }}">
-          {{ variant.title }} - {{ variant.price | money }}
-          </option>
-        {% endfor %}
-        </select>
-      </div>
-
-      <div id="backorder" class="hidden">
-        <p>{{ '%s is back-ordered. We will ship it separately in 10 to 15 days.' | replace: '%s', '<span id="selected-variant"></span>' }}</p>
-      </div>
-      </div>
-      <div id="product-add">
-        <input type="submit" name="add" id="add" class="primary button" value="{{ add_to_cart | escape }}">
-      </div>
-  <div class="quantity-container">
-      <input min="1" type="number" id="quantity" name="quantity" value="1" />
-          <input type='button' value='-' class='qtyminus' field='quantity' />
-          <input type='button' value='+' class='qtyplus' field='quantity' />
-      </div>
-  </div> <!-- product info 2 -->
 
 
 
@@ -289,6 +217,7 @@ var selectCallback = function(variant, selector) {
       // Variant is sold out.
       jQuery('#backorder').addClass('hidden');
       jQuery('#add').val({{ sold_out | json }}).addClass('disabled').prop('disabled', true);
+      jQuery('#stock-message').addClass('show-message-stock');
     }
 
     // Whether the variant is in stock or not, we can update the price and compare at price.
