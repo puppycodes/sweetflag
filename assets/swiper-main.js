@@ -37,6 +37,7 @@ var mySwiper = new Swiper ('.swiper-container', {
   //scrollbar: '.swiper-scrollbar',
 })
 
+
 /* Update main product image when a thumbnail is clicked. */
 /*==========================*/
 $('.product-photo-thumb a').on('click', function(e) {
@@ -44,4 +45,14 @@ $('.product-photo-thumb a').on('click', function(e) {
   switchImage($(this).attr('href'), null, $('.product-photo-container img')[0]);
 } );
 
+        if (jQuery(window).width() >= 768) {
+            mySwiper.slideNext(true, 0); 
+        };
+
+
   });
+
+
+
+
+
